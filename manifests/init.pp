@@ -27,8 +27,6 @@ class rancid (
 
   $default_cloginrc_content = "# This file is being maintained by Puppet.\n# DO NOT EDIT\nConsult man page for cloginrc(5) for help."
 
-  $cloginrc_path = "${homedir_real}/.cloginrc"
-
   case $::osfamily {
     default: {
       notify { "Rancid is unsupported for ${::operatingsystem}.": }
@@ -115,6 +113,8 @@ class rancid (
   } else {
     $rancid_path_env_real = $rancid_path_env
   }
+
+  $cloginrc_path = "${homedir_real}/.cloginrc"
 
   # validate parameters
   validate_re($filterpwds, '^(yes|YES|no|NO|all|ALL)$',
